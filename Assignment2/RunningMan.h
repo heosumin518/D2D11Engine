@@ -20,6 +20,8 @@ namespace assignment2
 
 	private:
 		D2DRenderer* mD2dRenderer;
+		ID2D1Bitmap* playerBitmap;
+		ID2D1Bitmap* backgroundBitmap;
 	};
 }
 
