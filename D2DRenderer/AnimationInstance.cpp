@@ -24,12 +24,14 @@ void AnimationInstance::Update(float deltaTime)
 		mAnimationProgress -= frameDistance;
 		mFrameIndex++;
 		if (mFrameIndex >= bitmapInfo[mAnimationIndex].size())
+		{
 			mFrameIndex = 0;
+		}
 	}
 	mAnimationProgress += deltaTime;
 }
 
-void AnimationInstance::Render(ID2D1RenderTarget* renderTarget)
+void AnimationInstance::Render(D2DRenderer* d2dRenderer)	//ID2D1RenderTarget* renderTarget
 {
 	ID2D1Bitmap* bitmap = mAnimationAsset.GetBitmap();
 	const std::vector<std::vector<FrameInfo>>& bitmapInfo = mAnimationAsset.GetBitmapInfo();
@@ -39,6 +41,8 @@ void AnimationInstance::Render(ID2D1RenderTarget* renderTarget)
 	rect.bottom = bitmapInfo[mAnimationIndex][mFrameIndex].bottom;
 	rect.right = bitmapInfo[mAnimationIndex][mFrameIndex].right;
 	rect.top = bitmapInfo[mAnimationIndex][mFrameIndex].top;
-	renderTarget->DrawBitmap(bitmap, mPositionInfo, 1.f, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, rect);
+
+	d2dRenderer->DrawAnimationBitmap(bitmap, mPositionInfo, rect);
+	//renderTarget->DrawBitmap(bitmap, mPositionInfo, 1.f, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, rect);
 }
 

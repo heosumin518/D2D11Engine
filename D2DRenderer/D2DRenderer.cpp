@@ -132,9 +132,86 @@ void D2DRenderer::EndDraw()
 	// 실패시 렌더타겟 재성성이지만 실패는 그래픽아답터 제거
 }
 
+HRESULT D2DRenderer::CreateD2DBitmapFromFile(const WCHAR* strFilePath, ID2D1Bitmap** pID2D1Bitmap)
+{
+	HRESULT hr;
+	// Create a decoder
+	IWICBitmapDecoder* pDecoder = NULL;
+
+	hr = m_pIWICImagingFactory->CreateDecoderFromFilename(
+		strFilePath,                      // Image to be decoded
+		NULL,                            // Do not prefer a particular vendor
+		GENERIC_READ,                    // Desired read access to the file
+		WICDecodeMetadataCacheOnDemand,  // Cache metadata when needed
+		&pDecoder                        // Pointer to the decoder
+	);
+
+
+	// Retrieve the first frame of the image from the decoder
+	IWICBitmapFrameDecode* pFrame = NULL;
+
+	if (SUCCEEDED(hr))
+	{
+		hr = pDecoder->GetFrame(0, &pFrame);
+	}
+
+	IWICFormatConverter* pConverter = NULL;
+
+	//Step 3: Format convert the frame to 32bppPBGRA
+	if (SUCCEEDED(hr))
+	{
+		hr = m_pIWICImagingFactory->CreateFormatConverter(&pConverter);
+	}
+
+	if (SUCCEEDED(hr))
+	{
+		hr = pConverter->Initialize(
+			pFrame,                          // Input bitmap to convert
+			GUID_WICPixelFormat32bppPBGRA,   // Destination pixel format
+			WICBitmapDitherTypeNone,         // Specified dither pattern
+			NULL,                            // Specify a particular palette 
+			0.f,                             // Alpha threshold
+			WICBitmapPaletteTypeCustom       // Palette translation type
+		);
+	}
+
+	if (SUCCEEDED(hr))
+	{
+		hr = m_pRenderTarget->CreateBitmapFromWicBitmap(pConverter, NULL, pID2D1Bitmap);
+	}
+
+
+	if (pFrame != NULL)
+		pFrame->Release();
+
+	if (pConverter != NULL)
+		pConverter->Release();
+
+	if (pDecoder != NULL)
+		pDecoder->Release();
+
+	if (FAILED(hr))
+	{
+		_com_error err(hr);
+		::MessageBox(gameProcessor::WinApp::GetHwnd(), strFilePath, L"FAILED", MB_OK);
+	}
+
+	return hr;
+}
+
 void D2DRenderer::DrawRectangle(const D2D1_RECT_F& rect, const D2D1::Matrix3x2F matrix)
 {
 	m_pRenderTarget->SetTransform(matrix);
 	m_pRenderTarget->DrawRectangle(&rect, m_pBrush);
 	m_pRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
+}
+
+void D2DRenderer::DrawBitmap(ID2D1Bitmap* bitmap)
+{
+	m_pRenderTarget->DrawBitmap(bitmap);
+}
+
+void D2DRenderer::DrawAnimationBitmap(ID2D1Bitmap* bitmap, D2D1_RECT_F spriteRect, D2D1_RECT_F worldRect)
+{
+	m_pRenderTarget->DrawBitmap(bitmap, spriteRect, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, worldRect);
 }

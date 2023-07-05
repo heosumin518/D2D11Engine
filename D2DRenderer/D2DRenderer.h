@@ -16,8 +16,11 @@ public:
 	void	EndDraw();
 	void	DrawRectangle(const D2D1_RECT_F& rect, const D2D1::Matrix3x2F matrix);
 
+	void	DrawBitmap(ID2D1Bitmap* bitmap);
+	void	DrawAnimationBitmap(ID2D1Bitmap* bitmap, D2D1_RECT_F spriteRect, D2D1_RECT_F worldRect);
+
 	// 공유하는 비트맵 생성
-	HRESULT			CreateD2DBitmapFromFile(std::wstring strFilePath, ID2D1Bitmap** pID2D1Bitmap);
+	HRESULT			CreateD2DBitmapFromFile(const WCHAR* strFilePath, ID2D1Bitmap** pID2D1Bitmap);
 	// 릴리즈를 대신 호출하면서 카운터가 0이 되면 공유중인 목록에서 제거한다.
 	void			ReleaseD2DBitmapFromFile(ID2D1Bitmap* pID2D1Bitmap);
 

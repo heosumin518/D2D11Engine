@@ -1,5 +1,6 @@
 #pragma once
 #include "AnimationAsset.h"
+#include "D2DRenderer.h"
 
 class AnimationInstance
 {
@@ -7,7 +8,7 @@ public:
 	AnimationInstance(unsigned int _frameIndex, unsigned int _animationIndex, D2D1_RECT_F _positionInfo, const AnimationAsset& _animationAsset); //float _animationProgress
 
 	void Update(float deltaTime);
-	void Render(ID2D1RenderTarget* renderTarget);
+	void Render(D2DRenderer* d2dRenderer);	//ID2D1RenderTarget* renderTarget
 
 private:
 	/// ∫Ò∆Æ∏ 
