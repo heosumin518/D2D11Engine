@@ -108,6 +108,7 @@ namespace assignment2
 
 		mD2dRenderer->EndDraw();
 	}
+
 	void RunningMan::Destroy()
 	{
 		for (auto ani : animationAssets)

@@ -9,9 +9,23 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="리소스 파일">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="01.MainGame">
+      <UniqueIdentifier>{125f2016-75bd-4356-b87d-292485c58e7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Manager">
+      <UniqueIdentifier>{45d5b74f-9a85-4711-b929-c82a7cf80084}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Scene">
+      <UniqueIdentifier>{02b8f9c6-5ab7-4b32-97ee-a3729eb554ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Objects">
+      <UniqueIdentifier>{41b2ce8a-9be1-48ce-8d97-57ff8686ac61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99.Headers">
+      <UniqueIdentifier>{ea579051-5e02-4e2e-877b-da56d9c1ac10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99.Headers\Default">
+      <UniqueIdentifier>{bb352b57-71bb-4296-870b-78bd5ea933ed}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -24,20 +38,26 @@
     <ClInclude Include="D2DRenderer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="pch.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="framework.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="WinApp.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>01.MainGame</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>02.Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeManager.h">
+      <Filter>02.Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>99.Headers</Filter>
     </ClInclude>
     <ClInclude Include="GameProcessor.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>01.MainGame</Filter>
+    </ClInclude>
+    <ClInclude Include="framework.h">
+      <Filter>99.Headers\Default</Filter>
     </ClInclude>
     <ClInclude Include="FrameInfo.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>99.Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -50,14 +70,20 @@
     <ClCompile Include="D2DRenderer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="pch.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="WinApp.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>01.MainGame</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>02.Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeManager.cpp">
+      <Filter>02.Manager</Filter>
     </ClCompile>
     <ClCompile Include="GameProcessor.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>01.MainGame</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>99.Headers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
